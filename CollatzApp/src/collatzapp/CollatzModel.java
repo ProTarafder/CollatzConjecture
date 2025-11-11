@@ -14,15 +14,13 @@ public class CollatzModel {
      * @return aSequenceResult object containing everything
      */
     public SequenceResult calculateSequence(int startNum) {
-        //TODO: handling big numbers and special cases (e.g. 27)
-        //avgGrowth, stopTimeColla
+        //TODO: handling big numbers
+        long startTime = System.nanoTime();
         int currentNum = startNum;
         int stepsToOne = 0;
         int peakNum = startNum;
-        int stopTime = 0;
         List<Integer> sequence = new ArrayList<>();
-        double avgGrowth = 0.0;
-        
+        double sum = startNum;
         sequence.add(startNum);
         
         while (currentNum != 1) {
@@ -33,6 +31,7 @@ public class CollatzModel {
                 currentNum = (currentNum * 3) + 1;
             }
             
+            sum += currentNum;
             stepsToOne++;
             sequence.add(currentNum);
             
@@ -40,6 +39,10 @@ public class CollatzModel {
                 peakNum = currentNum;
             }         
         }
+        
+        long endTime = System.nanoTime();
+        long stopTime = endTime - startTime;
+        double avgGrowth = sum / stepsToOne;
         
         return new SequenceResult(startNum, sequence, stepsToOne, peakNum, stopTime, avgGrowth);
     } 

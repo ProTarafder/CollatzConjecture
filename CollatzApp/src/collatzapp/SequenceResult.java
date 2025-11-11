@@ -16,10 +16,10 @@ public class SequenceResult {
     private final List<Integer> sequence;
     private final int stepsToOne;
     private final int peakNum;
-    private final int stopTime;
+    private final long stopTime;
     private final double avgGrowth;
     
-    public SequenceResult(int startNum, List<Integer> sequence, int stepsToOne, int peakNum, int stopTime, double avgGrowth) {
+    public SequenceResult(int startNum, List<Integer> sequence, int stepsToOne, int peakNum, long stopTime, double avgGrowth) {
         this.startNum = startNum;
         this.sequence = sequence;
         this.stepsToOne = stepsToOne;
@@ -45,7 +45,7 @@ public class SequenceResult {
         return stepsToOne;
     }
 
-    public int totalStoppingTime() { 
+    public long totalStoppingTime() { 
         return stopTime; 
     }
     
