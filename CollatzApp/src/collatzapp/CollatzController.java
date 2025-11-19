@@ -8,6 +8,10 @@ package collatzapp;
  * event handler for the project, to be build after scene builder is ready.
  * @author thiago
  */
-public class CollatzController {
+public class CollatzController implements Initializable {
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+    }  
 }
