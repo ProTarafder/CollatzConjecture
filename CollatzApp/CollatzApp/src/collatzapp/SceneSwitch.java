@@ -17,7 +17,7 @@ import javafx.stage.Stage;
 public class SceneSwitch {
     private SceneSwitch(){} //Utility class, no instances
     
-    //Switches from Stage to new FXML layout
+    //Switches from Stage to new FXML layout (for comapre)
     public static void switchTo(Stage stage, String fxmlPath) throws IOException{
         FXMLLoader loader = new FXMLLoader(SceneSwitch.class.getResource(fxmlPath));
         Parent newRoot = loader.load();

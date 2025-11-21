@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
  */
 package collatzapp;
 
@@ -9,13 +9,18 @@ import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
 
 /**
- * event handler for the project, to be build after scene builder is ready.
- * @author thiago
+ * FXML Controller class
+ *
+ * @author Admin
  */
-public class CollatzController implements Initializable {
-    
+public class CompareController implements Initializable {
+
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-    }  
+        // TODO
+    }    
+    
 }
