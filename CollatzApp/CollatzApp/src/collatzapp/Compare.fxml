@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.*?>
+
+<BorderPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="collatzapp.CollatzController">
+    <top>
+        <ToolBar>
+            <Label text="Compare multiple seeds (comma or space separated):" />
+            <TextField fx:id="compareInput" prefWidth="300" promptText="e.g. 7,12,27" />
+            <Button fx:id="compareStartBtn" text="Generate Comparison" />
+            <Button fx:id="backBtn" text="Back" />
+        </ToolBar>
+    </top>
+
+
+    <center>
+        <SplitPane orientation="HORIZONTAL">
+            <LineChart fx:id="chart" prefHeight="500" prefWidth="820" animated="false">
+                <xAxis>
+                    <NumberAxis fx:id="xAxis" label="Step"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Value"/>
+                </yAxis>
+            </LineChart>
+
+
+            <VBox spacing="8" padding="10">
+                <Label text="Comparison Metrics" />
+                <TextArea fx:id="compareMetrics" prefWidth="320" wrapText="true" editable="false" />
+            </VBox>
+        </SplitPane>
+    </center>
+</BorderPane>
