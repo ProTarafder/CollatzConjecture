@@ -1,5 +1,6 @@
-package collatzapp;
+package Model;
 
+import Main.SequenceResult;
 import java.util.ArrayList;
 import java.util.List;
 
