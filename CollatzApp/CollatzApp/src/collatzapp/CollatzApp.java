@@ -4,8 +4,12 @@
  */
 package collatzapp;
 
+import java.io.IOException;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -21,7 +25,14 @@ public class CollatzApp extends Application{
         launch(args);
     }
     
-    public void start(Stage primaryStage){
+    @Override
+    public void start(Stage primaryStage) throws IOException{
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SingleRun.fxml"));
+        Parent root = loader.load();
         
+        Scene scene = new Scene(root, 1000, 750);
+        primaryStage.setTitle("Collatz COnjecture Visualization");
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 }
