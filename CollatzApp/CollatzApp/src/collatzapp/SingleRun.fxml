@@ -64,16 +64,6 @@
 
         </VBox>
     </center>
-
-    <right>
-        <VBox spacing="8" padding="10">
-            <Label text="Metrics"/>
-            <TextArea fx:id="metricsArea" prefWidth="260" prefHeight="600" editable="false" wrapText="true"/>
-            <Separator/>
-            <Label text="Project Proposal"/>
-            <Hyperlink fx:id="proposalLink" text="Open proposal PDF"/>
-        </VBox>
-    </right>
-
+    
 </BorderPane>
 

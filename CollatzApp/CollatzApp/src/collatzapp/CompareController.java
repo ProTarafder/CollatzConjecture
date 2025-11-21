@@ -11,8 +11,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 
@@ -21,17 +19,15 @@ import javafx.scene.control.TextField;
  *
  * @author Admin
  */
-public class CollatzController implements Initializable {
-
-    //UI Controls
-    @FXML private TextField inputField;
-    @FXML private Button startBtn, pauseBtn, resetBtn, exportBtn;
-    @FXML private LineChart<Number, Number> chart;
-    @FXML private NumberAxis xAxis, yAxis;
-    @FXML private TextArea metricsArea;
+public class CompareController implements Initializable {
+    @FXML private TextField compareInput;
+    @FXML private Button compareStartBtn, backBtn;
     
-    @FXML private MenuItem exportMenuItem, exitMenuItem, openCompareMenu, aboutMenu;
-    @FXML private RadioMenuItem linearScaleMenu;
+    @FXML private LineChart<Number, Number> compareChart;
+    @FXML private NumberAxis compareXAxis, compareYAxis;
+    
+    @FXML private TextArea compareMetrics;
+
     /**
      * Initializes the controller class.
      */
