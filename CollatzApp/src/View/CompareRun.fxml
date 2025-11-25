@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.chart.*?>
 
-<BorderPane id="BorderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="collatzapp.CompareController">
+<BorderPane id="BorderPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="collatzapp.CompareController">
     <top>
         <ToolBar>
             <Label text="Compare multiple seeds (comma or space separated):" />
@@ -20,19 +20,13 @@
 
     <center>
         <SplitPane orientation="HORIZONTAL">
-            <LineChart fx:id="chart" prefHeight="500" prefWidth="820" animated="false">
-                <xAxis>
-                    <NumberAxis fx:id="xAxis" label="Step"/>
-                </xAxis>
-                <yAxis>
-                    <NumberAxis fx:id="yAxis" label="Value"/>
-                </yAxis>
-            </LineChart>
+            
+            <!-- Chart Container (LineChart added in controller) -->
+            <VBox fx:id="compareChartContainer" prefWidth="800" spacing="10"/>
 
-
-            <VBox spacing="8" padding="10">
+            <VBox spacing="10" padding="12">
                 <Label text="Comparison Metrics" />
-                <TextArea fx:id="compareMetrics" prefWidth="320" wrapText="true" editable="false" />
+                <TextArea fx:id="compareMetrics" prefWidth="300" wrapText="true" editable="false" />
             </VBox>
         </SplitPane>
     </center>

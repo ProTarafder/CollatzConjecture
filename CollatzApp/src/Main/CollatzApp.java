@@ -24,7 +24,7 @@ public class CollatzApp extends Application {
     
     @Override
     public void start(Stage primaryStage) throws IOException{
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/SingleRun.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SingleRun.fxml"));
         Parent root = loader.load();
         
         Scene scene = new Scene(root, 1000, 750);
