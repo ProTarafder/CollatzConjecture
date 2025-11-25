@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane id="BorderPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="collatzapp.CollatzController">
+<BorderPane id="BorderPane" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.CollatzController">
 
     <top>
         <MenuBar>
