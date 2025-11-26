@@ -38,7 +38,7 @@ public class CollatzApp extends Application {
         background.setPreserveRatio(false);
         
         Label title = new Label("Collatz Conjecture Visualization");
-        title.setStyle("-fx-font-size: 40px; -fx-text-fill: white; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 40px; -fx-text-fill: pink; -fx-font-weight: bold;");
         
         Button start = new Button("Start");
         start.setStyle("-fx-font-size: 22px; -fx-padding: 10 35;");
