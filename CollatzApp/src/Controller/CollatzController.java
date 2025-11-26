@@ -16,10 +16,7 @@ import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
-<<<<<<< HEAD
-=======
 import Model.CollatzModel;
->>>>>>> 76410570124bf2ccef97c6cf9fd7c4e7a959d948
 
 /**
  * event handler for the project, to be build after scene builder is ready.
@@ -34,15 +31,6 @@ public class CollatzController implements Initializable {
     @FXML
     private Button startBtn, pauseBtn, resetBtn, exportBtn;
     @FXML
-<<<<<<< HEAD
-    private LineChart<Number, Number> chart;
-    @FXML
-    private NumberAxis xAxis, yAxis;
-    @FXML
-    VBox chartContainer;
-    @FXML
-=======
->>>>>>> 76410570124bf2ccef97c6cf9fd7c4e7a959d948
     private TextArea metricsArea;
 
     @FXML
@@ -59,16 +47,6 @@ public class CollatzController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
-        NumberAxis xAxis = new NumberAxis();
-        xAxis.setLabel("Step");
-        
-        NumberAxis yAxis = new NumberAxis();
-        yAxis.setLabel("Value");
-        
-        chart = new LineChart<>(xAxis, yAxis);
-        chart.setAnimated(false);
-        
-        chartContainer.getChildren().add(chart);
     }
 
     /**
