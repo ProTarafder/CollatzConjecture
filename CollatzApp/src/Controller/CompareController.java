@@ -13,6 +13,7 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 /**
  * FXML Controller class
@@ -25,7 +26,8 @@ public class CompareController implements Initializable {
     private TextField compareInput;
     @FXML
     private Button compareStartBtn, backBtn;
-
+    @FXML
+    private VBox compareChartContainer;
     @FXML
     private LineChart<Number, Number> compareChart;
     @FXML
@@ -39,7 +41,17 @@ public class CompareController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
+        NumberAxis x = new NumberAxis();
+        x.setLabel("Step");
+        
+        NumberAxis y = new NumberAxis();
+        y.setLabel("Value");
+        
+        compareChart = new LineChart<>(x, y);
+        compareChart.setAnimated(false);
+        
+        compareChartContainer.getChildren().add(compareChart);
     }
 
 }
