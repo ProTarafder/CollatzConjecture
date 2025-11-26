@@ -106,3 +106,4 @@ public class CompareController {
 
         compareMetrics.setText(metricsOutput);
     }
+}
