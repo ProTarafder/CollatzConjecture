@@ -113,16 +113,16 @@ public class CollatzController{
             }
         });
         
-        exitMenuItem.setOnAction(e -> Platform.exit());
-        aboutMenu.setOnAction(e -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("About");
-            alert.setHeaderText("Collatz Conjecture Visualizer");
-            alert.setContentText("A tool to visualize the 3n+1 problem.");
-            alert.showAndWait();
-        });
-        
-        exportMenuItem.setOnAction(this::exportOnAction);
+//        exitMenuItem.setOnAction(e -> Platform.exit());
+//        aboutMenu.setOnAction(e -> {
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("About");
+//            alert.setHeaderText("Collatz Conjecture Visualizer");
+//            alert.setContentText("A tool to visualize the 3n+1 problem.");
+//            alert.showAndWait();
+//        });
+//        
+//        exportMenuItem.setOnAction(this::exportOnAction);
     }
 
     /**
@@ -269,26 +269,46 @@ public class CollatzController{
     }
 
     @FXML
-    private void exportItemOnAction(ActionEvent event) {
-    }
+private void exportItemOnAction(ActionEvent event) {
+    // Calls the existing logic
+    exportOnAction(event);
+}
 
-    @FXML
-    private void exitOnAction(ActionEvent event) {
-    }
+@FXML
+private void exitOnAction(ActionEvent event) {
+    Platform.exit();
+}
 
-    @FXML
-    private void linearScaneOnAction(ActionEvent event) {
-    }
+@FXML
+private void linearScaneOnAction(ActionEvent event) {
+    // Note: The listener handles the scale change logic. 
+    // This method is only required to satisfy the FXML parser. 
+    // The actual scale logic is inside the ToggleGroup listener in initialize().
+    // If you remove the ToggleGroup logic, you must move the plotting logic here.
+}
 
-    @FXML
-    private void logScaleOnAction(ActionEvent event) {
-    }
+@FXML
+private void logScaleOnAction(ActionEvent event) {
+    // Note: Same as above. Logic is handled by the ToggleGroup listener.
+}
 
-    @FXML
-    private void openCompareOnAction(ActionEvent event) {
+@FXML
+private void openCompareOnAction(ActionEvent event) {
+    try {
+        Stage stage = (Stage) chart.getScene().getWindow();
+        SceneSwitch.switchTo(stage, "/View/CompareRun.fxml"); 
+    } catch (Exception ex) {
+        showError("Navigation Error", "Could not load Compare View: " + ex.getMessage());
+        ex.printStackTrace();
     }
+}
 
-    @FXML
-    private void aboutOnAction(ActionEvent event) {
-    }
+@FXML
+private void aboutOnAction(ActionEvent event) {
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    alert.setTitle("About");
+    alert.setHeaderText("Collatz Conjecture Visualization");
+    alert.setContentText("A tool to visualize the 3n+1 problem.");
+    alert.showAndWait();
+}
 }
