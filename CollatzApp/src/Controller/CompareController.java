@@ -15,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -26,6 +27,7 @@ import javafx.stage.Stage;
  *
  * @author Admin
  */
+
 public class CompareController {
 
     @FXML
@@ -70,40 +72,56 @@ public class CompareController {
             }
         });
     }
-
     private void onCompareStart() {
+        // 1. Validate and Parse Seeds
         List<Integer> seeds = Validation.parseSeeds(compareInput.getText());
         if (seeds.isEmpty()) {
-            compareMetrics.setText("No valid seeds provided");
+            compareMetrics.setText("No valid seeds provided. Please enter positive integers.");
             return;
         }
 
+        // 2. Clear previous data
         compareChart.getData().clear();
         compareMetrics.clear();
 
-        String metricsOutput = "";
+        StringBuilder metricsOutput = new StringBuilder();
 
+        // 3. Process and Plot Each Seed
         for (int seed : seeds) {
 
-            //computes instantly using model
-            SequenceResult result = memo.computeIfAbsent(seed, k -> model.calculateSequence(k));
+            // Get result (computes or retrieves from cache)
+            SequenceResult result = memo.computeIfAbsent(seed, model::calculateSequence);
 
-            //series
+            // Create Series for the new sequence
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
-            series.setName("n =" + seed);
+            series.setName("n=" + seed);
 
             List<Integer> seq = result.sequence();
+            
+            // --- PLOTTING LOGIC ADDED HERE ---
+            for (int i = 0; i < seq.size(); i++) {
+                // Plots the step index (i) vs the value (seq.get(i))
+                series.getData().add(new XYChart.Data<>(i, seq.get(i)));
+            }
+            // --- END PLOTTING LOGIC ---
 
-            //Timeline to animate plotting
             compareChart.getData().add(series);
 
-            metricsOutput
-                    = metricsOutput
-                    + "Seed " + seed + ":\n"
-                    + " Steps to 1: " + result.stepsToReachOne() + "\n"
-                    + " Peak: " + result.peakNum() + "\n\n";
+            // Append Metrics
+            metricsOutput.append("Seed ").append(seed).append(":\n")
+                    .append(" Steps to 1: ").append(result.stepsToReachOne()).append("\n")
+                    .append(" Peak: ").append(result.peakNum()).append("\n\n");
         }
 
-        compareMetrics.setText(metricsOutput);
+        compareMetrics.setText(metricsOutput.toString());
     }
+
+    
+    private void showError(String header, String content) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(header);
+            alert.setContentText(content);
+            alert.showAndWait();
+        }
 }
