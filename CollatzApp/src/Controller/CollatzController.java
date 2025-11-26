@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import Main.SceneSwitch;
 import Main.SequenceResult;
+import Main.Validation;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -70,7 +72,7 @@ public class CollatzController{
         openCompareMenu.setOnAction(e -> {
             try{
                 Stage stage = (Stage) chart.getScene().getWindow();
-                SceneSwitcher.switchTO(stage, "collatz/compareRun.fxml");
+                SceneSwitch.switchTo(stage, "collatz/compareRun.fxml");
             } catch (Exception ex){
                 ex.printStackTrace();
             }
@@ -85,15 +87,22 @@ public class CollatzController{
     private void runOnAction(ActionEvent event) {
         List<Integer> seeds = Validation.parseSeeds(inputField.getText());
         if(seeds.isEmpty()){
-            show("Input required", "Input a positive integer.");
+            //alert method have to add
+            alert("Input required", "Input a positive integer.");
             return;
         }
         int num = seeds.get(0);
         
         //validaiton
-        String warning = Validation.validateSeed()
+        String warning = Validation.validateSeed(num, MAX_RECOMMENDED);
         
-        SequenceResult result = model.calculateSequence(num);
+        chart.getData().clear();
+        metricsArea.clear();
+        
+        //computes full sequence instantly
+        SequenceResult result = memo.computeIfAbsent(num, k -> model.calculateSequence(k));
+        List<Integer> seq = result.sequence();
+        
         double avg = result.avgGrowth();
         String avgFormatted = String.format("%.2f", avg);    
         
