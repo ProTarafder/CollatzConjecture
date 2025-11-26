@@ -56,7 +56,7 @@ public class CollatzApp extends Application {
         
         //MAIN APPLICATION
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SingleRun.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/SingleRun.fxml"));
         
         Scene mainScene = new Scene(loader.load(), 1000, 750);
         primaryStage.setTitle("Collatz Conjecture Visualization");

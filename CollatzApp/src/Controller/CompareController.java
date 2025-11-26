@@ -64,7 +64,7 @@ public class CompareController {
         backBtn.setOnAction(e -> {
             try {
                 Stage stage = (Stage) compareChart.getScene().getWindow();
-                SceneSwitch.switchTo(stage, "collatz/SingleRun.fxml");
+            SceneSwitch.switchTo(stage, "/View/SingleRun.fxml");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -106,3 +106,4 @@ public class CompareController {
 
         compareMetrics.setText(metricsOutput);
     }
+}
