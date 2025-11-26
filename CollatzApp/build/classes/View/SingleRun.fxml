@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane id="BorderPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="collatzapp.CollatzController">
+
+    <top>
+        <MenuBar>
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem fx:id="exportMenuItem" text="Export CSV..."/>
+                        <SeparatorMenuItem/>
+                        <MenuItem fx:id="exitMenuItem" text="Exit"/>
+                    </items>
+                </Menu>
+
+                <Menu text="View">
+                    <items>
+                        <RadioMenuItem fx:id="linearScaleMenu" text="Linear Scale" selected="true"/>
+                        <RadioMenuItem fx:id="logScaleMenu" text="Logarithmic Scale"/>
+                    </items>
+                </Menu>
+
+                <Menu text="Mode">
+                    <items>
+                        <MenuItem fx:id="openCompareMenu" text="Open Compare Mode"/>
+                    </items>
+                </Menu>
+
+                <Menu text="Help">
+                    <items>
+                        <MenuItem fx:id="aboutMenu" text="About"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+    <center>
+        <VBox spacing="8" padding="10">
+
+            <HBox spacing="8" alignment="CENTER_LEFT">
+                <Label text="Enter n:"/>
+                <TextField fx:id="inputField" prefWidth="200"/>
+                <Button fx:id="startBtn" text="Run"/>
+                <Button fx:id="pauseBtn" text="Pause"/>
+                <Button fx:id="resetBtn" text="Reset"/>
+                <Button fx:id="exportBtn" text="Export CSV"/>
+            </HBox>
+
+            <LineChart fx:id="chart" prefHeight="500" prefWidth="820" animated="false">
+                <xAxis>
+                    <NumberAxis fx:id="xAxis" label="Step"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" label="Value"/>
+                </yAxis>
+            </LineChart>
+
+        </VBox>
+    </center>
+    
+</BorderPane>
+
