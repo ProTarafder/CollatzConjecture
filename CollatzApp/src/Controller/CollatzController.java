@@ -4,200 +4,117 @@
  */
 package Controller;
 
-
 import Main.SequenceResult;
-import Model.CollatzModel;
-
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import Model.CollatzModel;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import javafx.animation.Timeline;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
-import java.io.PrintWriter;
-import java.io.IOException;
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+/**
+ * event handler for the project, to be build after scene builder is ready.
+ *
+ * @author thiago
+ */
+public class CollatzController{
 
-public class CollatzController implements Initializable {
-
-    // --- FXML ---
+    //UI Controls
     @FXML private TextField inputField;
+    @FXML private VBox chartContainer;
+    @FXML private TextArea metricsArea;
     @FXML private Button startBtn;
     @FXML private Button pauseBtn;
     @FXML private Button resetBtn;
     @FXML private Button exportBtn;
 
-    @FXML private LineChart<Number, Number> chart;
-    @FXML private NumberAxis xAxis;
-    @FXML private NumberAxis yAxis;
-
+    @FXML private MenuItem openCompareMenu;
     @FXML private MenuItem exportMenuItem;
     @FXML private MenuItem exitMenuItem;
-    @FXML private MenuItem openCompareMenu;
     @FXML private MenuItem aboutMenu;
+    
+    private LineChart<Number, Number> chart;
+    
+    private Timeline timeline;
+    private boolean paused = false;
+    
+    private CollatzModel model = new CollatzModel();
+    private Map<Integer, SequenceResult> memo = new ConcurrentHashMap<>();
+    
+    private static int MAX_RECOMMENDED = 10_000; //can change
 
-    @FXML private RadioMenuItem linearScaleMenu;
-    @FXML private RadioMenuItem logScaleMenu;
+    @FXML
+    public void initialize() {
 
-    // --- MODEL ---
-    private final CollatzModel model = new CollatzModel();
-    private SequenceResult lastResult;
+        NumberAxis x = new NumberAxis();
+        x.setLabel("Step");
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
+        NumberAxis y = new NumberAxis();
+        y.setLabel("Value");
 
-        // chart config
+        chart = new LineChart<>(x, y);
         chart.setAnimated(false);
         chart.setCreateSymbols(false);
 
-        // group scale menu
-        ToggleGroup scaleGroup = new ToggleGroup();
-        linearScaleMenu.setToggleGroup(scaleGroup);
-        logScaleMenu.setToggleGroup(scaleGroup);
-        linearScaleMenu.setSelected(true);
-
-        // buttons
-        startBtn.setOnAction(e -> runCollatz());
-        inputField.setOnAction(e -> runCollatz());
-        resetBtn.setOnAction(e -> reset());
-        exportBtn.setOnAction(e -> exportCsv());
-
-        // pause does nothing for now
-        pauseBtn.setOnAction(e -> {});
-
-        // menu
-        exportMenuItem.setOnAction(e -> exportCsv());
-        exitMenuItem.setOnAction(e -> closeApp());
-        aboutMenu.setOnAction(e -> showAbout());
-        openCompareMenu.setOnAction(e -> showCompareTodo());
-
-        // scale switching
-        linearScaleMenu.setOnAction(e -> replot());
-        logScaleMenu.setOnAction(e -> replot());
+        chartContainer.getChildren().add(chart);
+        
+        openCompareMenu.setOnAction(e -> {
+            try{
+                Stage stage = (Stage) chart.getScene().getWindow();
+                SceneSwitcher.switchTO(stage, "collatz/compareRun.fxml");
+            } catch (Exception ex){
+                ex.printStackTrace();
+            }
+        });
     }
 
-    // -------------------------------
-    // Run Collatz
-    // -------------------------------
-    private void runCollatz() {
-        String text = inputField.getText();
-
-        int n;
-        try {
-            n = Integer.parseInt(text.trim());
-            if (n <= 0) {
-                alert("Input Error", "Enter a positive integer.");
-                return;
-            }
-        } catch (Exception ex) {
-            alert("Input Error", "Invalid number.");
+    /**
+     * gets all the information from the CollatzModel class when pressed
+     * @param event 
+     */
+    @FXML
+    private void runOnAction(ActionEvent event) {
+        List<Integer> seeds = Validation.parseSeeds(inputField.getText());
+        if(seeds.isEmpty()){
+            show("Input required", "Input a positive integer.");
             return;
         }
-
-        // compute
-        lastResult = model.calculateSequence(n);
-
-        // plot
-        plot(lastResult);
+        int num = seeds.get(0);
+        
+        //validaiton
+        String warning = Validation.validateSeed()
+        
+        SequenceResult result = model.calculateSequence(num);
+        double avg = result.avgGrowth();
+        String avgFormatted = String.format("%.2f", avg);    
+        
+        metricsArea.setText(
+                "Starting number: " + result.startNum() + "\n" +
+                "Steps to 1: " + result.stepsToReachOne() + "\n" +
+                "Peak value: " + result.peakNum() + "\n" +
+                "Stopping time (ns): " + result.totalStoppingTime() + "\n" +
+                "Average growth: " + avgFormatted + "\n\n" +
+                "Sequence:\n" + result.sequence());  
     }
 
-    // -------------------------------
-    // Plot helper
-    // -------------------------------
-    private void plot(SequenceResult result) {
-        chart.getData().clear();
-
-        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        series.setName("n = " + result.startNum());
-
-        List<Integer> seq = result.sequence();
-        boolean useLog = logScaleMenu.isSelected();
-
-        for (int i = 0; i < seq.size(); i++) {
-            double y = seq.get(i);
-            if (useLog) {
-                y = Math.log10(y);
-            }
-            series.getData().add(new XYChart.Data<>(i, y));
-        }
-
-        yAxis.setLabel(useLog ? "log10(value)" : "Value");
-        chart.getData().add(series);
+    @FXML
+    private void pauseOnAction(ActionEvent event) {
     }
 
-    private void replot() {
-        if (lastResult != null) {
-            plot(lastResult);
-        }
+    @FXML
+    private void resetOnAction(ActionEvent event) {
     }
 
-    // -------------------------------
-    // Reset
-    // -------------------------------
-    private void reset() {
-        chart.getData().clear();
-        inputField.clear();
-        lastResult = null;
-    }
-
-    // -------------------------------
-    // Export CSV
-    // -------------------------------
-    private void exportCsv() {
-        if (lastResult == null) {
-            alert("Export Error", "Run a sequence first.");
-            return;
-        }
-
-        Stage stage = (Stage) chart.getScene().getWindow();
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Save CSV");
-        chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV Files", "*.csv"));
-        chooser.setInitialFileName("collatz_" + lastResult.startNum() + ".csv");
-
-        File file = chooser.showSaveDialog(stage);
-        if (file == null) return;
-
-        try (PrintWriter out = new PrintWriter(file)) {
-            out.println("step,value");
-            List<Integer> seq = lastResult.sequence();
-            for (int i = 0; i < seq.size(); i++) {
-                out.println(i + "," + seq.get(i));
-            }
-        } catch (IOException ex) {
-            alert("Export Error", ex.getMessage());
-        }
-    }
-
-    // -------------------------------
-    // Menu helpers
-    // -------------------------------
-    private void closeApp() {
-        Stage stage = (Stage) chart.getScene().getWindow();
-        stage.close();
-    }
-
-    private void showAbout() {
-        alert("About", "Collatz Visualizer\nSingle-run Mode");
-    }
-
-    private void showCompareTodo() {
-        alert("Compare Mode", "Compare mode uses a separate controller.\n(Not implemented yet.)");
-    }
-
-    // -------------------------------
-    // Alerts
-    // -------------------------------
-    private void alert(String title, String msg) {
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.setHeaderText(title);
-        a.setContentText(msg);
-        a.showAndWait();
+    @FXML
+    private void exportOnAction(ActionEvent event) {
     }
 }
