@@ -85,6 +85,7 @@ public class CollatzController{
         chart.setAnimated(false);
         chart.setCreateSymbols(false);
         chartContainer.getChildren().add(chart);
+        
         // --- SCALE SWITCHING LOGIC ---
         ToggleGroup scaleGroup = new ToggleGroup();
         linearScaleMenu.setToggleGroup(scaleGroup);
@@ -102,8 +103,6 @@ public class CollatzController{
                 plotCurrentSequence(currentStartNum, useLogScale);
             }
         });
-
-        chartContainer.getChildren().add(chart);
         
         openCompareMenu.setOnAction(e -> {
             try{
