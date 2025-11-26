@@ -24,7 +24,7 @@
             <!-- Chart Container (LineChart added in controller) -->
             <VBox fx:id="compareChartContainer" prefWidth="800" spacing="10"/>
 
-            <VBox spacing="10" padding="12">
+            <VBox spacing="10">
                 <Label text="Comparison Metrics" />
                 <TextArea fx:id="compareMetrics" prefWidth="300" wrapText="true" editable="false" />
             </VBox>
