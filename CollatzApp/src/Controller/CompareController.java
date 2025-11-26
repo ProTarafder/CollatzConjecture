@@ -4,7 +4,9 @@
  */
 package Controller;
 
+import Main.SceneSwitch;
 import Main.SequenceResult;
+import Main.Validation;
 import Model.CollatzModel;
 import java.util.List;
 import java.util.Map;
@@ -61,8 +63,8 @@ public class CompareController {
         compareStartBtn.setOnAction(e -> onCompareStart());
         backBtn.setOnAction(e -> {
             try {
-                Stage stage = (Stage) compareShart.getScene().getWindow();
-                SceneSwitcher.swithTo(stage, "collatz/SingleRun.fxml");
+                Stage stage = (Stage) compareChart.getScene().getWindow();
+                SceneSwitch.switchTo(stage, "collatz/SingleRun.fxml");
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -81,27 +83,26 @@ public class CompareController {
 
         String metricsOutput = "";
 
-        for (int seed : seeds);
+        for (int seed : seeds) {
 
-        //computes instantly using model
-        SequenceResult result = memo.computeIfAbsent(seed, k -> model.calculateSequence(k));
+            //computes instantly using model
+            SequenceResult result = memo.computeIfAbsent(seed, k -> model.calculateSequence(k));
 
-        //series
-        XYChart.Series<Number, Number> series = new XYChart.Series<>();
-        series.setName("n =" + seed);
+            //series
+            XYChart.Series<Number, Number> series = new XYChart.Series<>();
+            series.setName("n =" + seed);
 
-        List<Integer> seq = result.sequence();
+            List<Integer> seq = result.sequence();
 
-        //Timeline to animate plotting
-        compareChart.getData().add(series);
+            //Timeline to animate plotting
+            compareChart.getData().add(series);
 
-        metricsOutput
-                = metricsOutput
-                + "Seed " + seed + ":\n"
-                + " Steps to 1: " + result.setpsToReachOne() + "\n"
-                + " Sequence length: " + result.sequenceLength() + "\n"
-                + " Peak: " + result.peakNum() + "\n\n";
+            metricsOutput
+                    = metricsOutput
+                    + "Seed " + seed + ":\n"
+                    + " Steps to 1: " + result.stepsToReachOne() + "\n"
+                    + " Peak: " + result.peakNum() + "\n\n";
+        }
+
+        compareMetrics.setText(metricsOutput);
     }
-
-    compareMetrics.setText (metricsOutput);
-}
