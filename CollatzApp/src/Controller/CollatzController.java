@@ -73,7 +73,6 @@ public class CollatzController{
     
     private static int MAX_RECOMMENDED = 10_000; //can change
 
-    @FXML
     public void initialize() {
 
         NumberAxis x = new NumberAxis();
@@ -268,5 +267,29 @@ public class CollatzController{
         alert.setHeaderText(header);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+
+    @FXML
+    private void exportItemOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void exitOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void linearScaneOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void logScaleOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void openCompareOnAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void aboutOnAction(ActionEvent event) {
     }
 }
