@@ -103,14 +103,28 @@ public class CollatzController{
      */
     @FXML
     private void runOnAction(ActionEvent event) {
-        List<Long> seeds = Validation.parseSeeds(inputField.getText());
-        if(seeds.isEmpty()){
-            //alert method have to add
-            showError("Input required", "Input a positive integer.");
+        List<Long> seeds;
+        try {
+            // 1. ATTEMPT TO PARSE
+            // If the user typed "2727 h", parseSeeds throws an exception immediately.
+            seeds = Validation.parseSeeds(inputField.getText());
+            
+        } catch (NumberFormatException e) {
+            // 2. CATCH INVALID INPUT
+            // This block runs if ANY letter or symbol was found.
+            showError("Invalid Input", "Please enter only valid positive numbers.\n(Found invalid text: '" + inputField.getText() + "')");
+            return; // STOPS THE PROGRAM HERE
+        }
+
+        // 3. CHECK FOR EMPTY INPUT
+        if (seeds.isEmpty()) {
+            showError("Input Required", "Please enter a number.");
             return;
         }
-        long num = seeds.get(0);
         
+        // 4. PROCEED WITH VALID INPUT
+        long num = seeds.get(0);
+       
         String warning = Validation.validateSeed(num, MAX_RECOMMENDED);
         if (warning != null) {
            

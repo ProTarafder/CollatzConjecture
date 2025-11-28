@@ -21,23 +21,26 @@ public class Validation {
      * separates by commas and/or spaces
      */
  public static List<Long> parseSeeds(String input){ // RETURN TYPE CHANGED to List<Long>
-        List<Long> out = new ArrayList<>(); // LIST TYPE CHANGED to Long
+        List<Long> out = new ArrayList<>();
         
         if (input == null || input.isBlank())
             return out;
         
-        String[] tokens = input.trim().split("[\\s]");
+        // Split by whitespace or commas (e.g., "5, 10 20")
+        String[] tokens = input.trim().split("[,\\s]+");
         
         for(String t : tokens){
-            try{
-                // KEY CHANGE: Use Long.parseLong to handle numbers > 2.1 billion
-                long value = Long.parseLong(t); 
-                if( value > 0) out.add(value);
-            }catch (NumberFormatException ignored){
-                // skips invalid entries
+            // STRICT PARSING:
+            // If 't' contains letters (e.g. "27h"), this line crashes immediately.
+            long value = Long.parseLong(t.trim());
+            
+            // Check for non-positive numbers
+            if(value <= 0) {
+                throw new NumberFormatException("Negative or zero value: " + value);
             }
+            
+            out.add(value);
         }
-        
         return out;
     }
     
