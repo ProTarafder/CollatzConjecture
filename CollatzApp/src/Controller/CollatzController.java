@@ -83,8 +83,7 @@ public class CollatzController{
         chart = new LineChart<>(x, y);
         chart.setAnimated(false);
         chart.setCreateSymbols(false);
-        chartContainer.getChildren().add(chart);
-        
+        chartContainer.getChildren().add(chart);        
         ToggleGroup scaleGroup = new ToggleGroup();
         linearScaleMenu.setToggleGroup(scaleGroup);
         logScaleMenu.setToggleGroup(scaleGroup);

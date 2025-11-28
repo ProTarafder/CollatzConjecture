@@ -20,6 +20,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -42,7 +43,7 @@ public class CompareController {
 
     private LineChart<Number, Number> compareChart;
     private final CollatzModel model = new CollatzModel();
-    private Map<Integer, SequenceResult> memo = new ConcurrentHashMap<>();
+    private Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
 
     /**
      * Initializes the controller class.
@@ -61,12 +62,17 @@ public class CompareController {
         compareChartContainer.getChildren().add(compareChart);
 
         compareStartBtn.setOnAction(e -> onCompareStart());
+        compareInput.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                onCompareStart();
+            }
+        });
 
     }
     
     private void onCompareStart() {
         // 1. Validate and Parse Seeds
-        List<Integer> seeds = Validation.parseSeeds(compareInput.getText());
+        List<Long> seeds = Validation.parseSeeds(compareInput.getText());
         if (seeds.isEmpty()) {
             compareMetrics.setText("No valid seeds provided. Please enter positive integers.");
             return;
@@ -79,7 +85,7 @@ public class CompareController {
         StringBuilder metricsOutput = new StringBuilder();
 
         // 3. Process and Plot Each Seed
-        for (int seed : seeds) {
+        for (long seed : seeds) {
 
             // Get result (computes or retrieves from cache)
             SequenceResult result = memo.computeIfAbsent(seed, model::calculateSequence);
@@ -88,7 +94,7 @@ public class CompareController {
             XYChart.Series<Number, Number> series = new XYChart.Series<>();
             series.setName("n=" + seed);
 
-            List<Integer> seq = result.sequence();
+            List<Long> seq = result.sequence();
             
             // --- PLOTTING LOGIC ADDED HERE ---
             for (int i = 0; i < seq.size(); i++) {
