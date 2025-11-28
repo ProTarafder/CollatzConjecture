@@ -13,14 +13,14 @@ import java.util.Objects;
  */
 public class SequenceResult {
 
-    private final int startNum;
-    private final List<Integer> sequence;
-    private final int stepsToOne;
-    private final int peakNum;
+    private final long startNum;
+    private final List<Long> sequence;
+    private final long stepsToOne;
+    private final long peakNum;
     private final long stopTime;
     private final double avgGrowth;
 
-    public SequenceResult(int startNum, List<Integer> sequence, int stepsToOne, int peakNum, long stopTime, double avgGrowth) {
+    public SequenceResult(long startNum, List<Long> sequence, long stepsToOne, long peakNum, long stopTime, double avgGrowth) {
         this.startNum = startNum;
         this.sequence = sequence;
         this.stepsToOne = stepsToOne;
@@ -34,15 +34,15 @@ public class SequenceResult {
         return "SequenceResult{" + "startNum=" + startNum + ", sequence=" + sequence + ", stepsToOne=" + stepsToOne + ", peakNum=" + peakNum + ", stopTime=" + stopTime + ", avgGrowth=" + avgGrowth + '}';
     }
 
-    public int startNum() {
+    public long startNum() {
         return startNum;
     }
 
-    public List<Integer> sequence() {
+    public List<Long> sequence() {
         return sequence;
     }
 
-    public int stepsToReachOne() {
+    public long stepsToReachOne() {
         return stepsToOne;
     }
 
@@ -50,7 +50,7 @@ public class SequenceResult {
         return stopTime;
     }
 
-    public int peakNum() {
+    public long peakNum() {
         return peakNum;
     }
 

@@ -14,13 +14,13 @@ public class CollatzModel {
      * @param startNum the number inputted 
      * @return aSequenceResult object containing everything
      */
-    public SequenceResult calculateSequence(int startNum) {
+    public SequenceResult calculateSequence(long startNum) {
         //TODO: handling big numbers
         long startTime = System.nanoTime();
-        int currentNum = startNum;
-        int stepsToOne = 0;
-        int peakNum = startNum;
-        List<Integer> sequence = new ArrayList<>();
+        long currentNum = startNum;
+        long stepsToOne = 0;
+        long peakNum = startNum;
+        List<Long> sequence = new ArrayList<>();
         double sum = startNum;
         sequence.add(startNum);
         

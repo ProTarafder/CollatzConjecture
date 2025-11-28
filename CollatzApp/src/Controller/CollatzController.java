@@ -14,16 +14,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.chart.LineChart;
+import javafx.scene.chart.*;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Alert;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -65,12 +63,12 @@ public class CollatzController{
     
     private Timeline timeline;
     private int animationIndex = 0;
-    private List<Integer> currentSequence;
+    private List<Long> currentSequence;
     private boolean paused = false;
     private int currentStartNum = -1;
     
     private CollatzModel model = new CollatzModel();
-    private Map<Integer, SequenceResult> memo = new ConcurrentHashMap<>();
+    private Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
     
     private static int MAX_RECOMMENDED = 10_000; //can change
 
@@ -87,24 +85,10 @@ public class CollatzController{
         chart.setCreateSymbols(false);
         chartContainer.getChildren().add(chart);
         
-        // --- SCALE SWITCHING LOGIC ---
         ToggleGroup scaleGroup = new ToggleGroup();
         linearScaleMenu.setToggleGroup(scaleGroup);
         logScaleMenu.setToggleGroup(scaleGroup);
-//        
-//        // Listen for menu item change to re-plot the existing data
-//        scaleGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
-//            boolean useLogScale = logScaleMenu.isSelected();
-//            // Update Y-Axis label
-//            y.setLabel(useLogScale ? "Value (Log Scale)" : "Value");
-//            
-//            // If we have a sequence plotted, re-plot it immediately
-//            if (currentSequence != null && currentStartNum != -1) {
-//                // We use the new plot method which doesn't animate in Log scale
-//                plotCurrentSequence(currentStartNum, useLogScale);
-//            }
-//        });
-//        
+
         //allows the code to run by pressing enter
         inputField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -120,13 +104,13 @@ public class CollatzController{
      */
     @FXML
     private void runOnAction(ActionEvent event) {
-        List<Integer> seeds = Validation.parseSeeds(inputField.getText());
+        List<Long> seeds = Validation.parseSeeds(inputField.getText());
         if(seeds.isEmpty()){
             //alert method have to add
             showError("Input required", "Input a positive integer.");
             return;
         }
-        int num = seeds.get(0);
+        long num = seeds.get(0);
         
         String warning = Validation.validateSeed(num, MAX_RECOMMENDED);
         if (warning != null) {
@@ -166,7 +150,7 @@ public class CollatzController{
         yAxis.setLabel(useLogScale ? "Value (Log Scale)" : "Value");
         
     }
-    private void plotCurrentSequence(int num, boolean useLogScale) {
+    private void plotCurrentSequence(long num, boolean useLogScale) {
         if (timeline != null) timeline.stop();
         chart.getData().clear();
 
