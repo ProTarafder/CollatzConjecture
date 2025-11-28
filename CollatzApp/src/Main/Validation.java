@@ -26,7 +26,7 @@ public class Validation {
         if (input == null || input.isBlank())
             return out;
         
-        String[] tokens = input.trim().split("[\\s]");
+        String[] tokens = input.trim().split("[\\s,]+");
         
         for(String t : tokens){
             try{
