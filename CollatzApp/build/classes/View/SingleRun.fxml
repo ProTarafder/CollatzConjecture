@@ -30,7 +30,7 @@
 
                 <Menu text="View">
                     <items>
-                        <RadioMenuItem fx:id="linearScaleMenu" onAction="#linearScaneOnAction" selected="true" text="Linear Scale" />
+                        <RadioMenuItem fx:id="linearScaleMenu" onAction="#linearScaleOnAction" selected="true" text="Linear Scale" />
                         <RadioMenuItem fx:id="logScaleMenu" onAction="#logScaleOnAction" text="Logarithmic Scale" />
                     </items>
                 </Menu>

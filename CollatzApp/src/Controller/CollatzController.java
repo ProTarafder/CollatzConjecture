@@ -91,29 +91,20 @@ public class CollatzController{
         ToggleGroup scaleGroup = new ToggleGroup();
         linearScaleMenu.setToggleGroup(scaleGroup);
         logScaleMenu.setToggleGroup(scaleGroup);
-        
-        // Listen for menu item change to re-plot the existing data
-        scaleGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
-            boolean useLogScale = logScaleMenu.isSelected();
-            // Update Y-Axis label
-            y.setLabel(useLogScale ? "Value (Log Scale)" : "Value");
-            
-            // If we have a sequence plotted, re-plot it immediately
-            if (currentSequence != null && currentStartNum != -1) {
-                // We use the new plot method which doesn't animate in Log scale
-                plotCurrentSequence(currentStartNum, useLogScale);
-            }
-        });
-        
-        openCompareMenu.setOnAction(e -> {
-            try{
-                Stage stage = (Stage) chart.getScene().getWindow();
-                SceneSwitch.switchTo(stage, "/View/CompareRun.fxml");
-            } catch (Exception ex){
-                ex.printStackTrace();
-            }
-        });
-        
+//        
+//        // Listen for menu item change to re-plot the existing data
+//        scaleGroup.selectedToggleProperty().addListener((obs, oldVal, newVal) -> {
+//            boolean useLogScale = logScaleMenu.isSelected();
+//            // Update Y-Axis label
+//            y.setLabel(useLogScale ? "Value (Log Scale)" : "Value");
+//            
+//            // If we have a sequence plotted, re-plot it immediately
+//            if (currentSequence != null && currentStartNum != -1) {
+//                // We use the new plot method which doesn't animate in Log scale
+//                plotCurrentSequence(currentStartNum, useLogScale);
+//            }
+//        });
+//        
         //allows the code to run by pressing enter
         inputField.setOnKeyReleased(event -> {
             if (event.getCode() == KeyCode.ENTER) {
@@ -121,16 +112,6 @@ public class CollatzController{
             }
         });
         
-//        exitMenuItem.setOnAction(e -> Platform.exit());
-//        aboutMenu.setOnAction(e -> {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("About");
-//            alert.setHeaderText("Collatz Conjecture Visualizer");
-//            alert.setContentText("A tool to visualize the 3n+1 problem.");
-//            alert.showAndWait();
-//        });
-//        
-//        exportMenuItem.setOnAction(this::exportOnAction);
     }
 
     /**
@@ -288,16 +269,23 @@ public class CollatzController{
     }
 
     @FXML
-    private void linearScaneOnAction(ActionEvent event) {
-        // Note: The listener handles the scale change logic. 
-        // This method is only required to satisfy the FXML parser. 
-        // The actual scale logic is inside the ToggleGroup listener in initialize().
-        // If you remove the ToggleGroup logic, you must move the plotting logic here.
+    private void linearScaleOnAction(ActionEvent event) {
+        // Logic to switch to Linear Scale (Animation)
+        if (currentSequence != null && currentStartNum != -1) {
+            // Set scale, then re-plot
+            ((NumberAxis) chart.getYAxis()).setLabel("Value");
+            plotCurrentSequence(currentStartNum, false);
+        }
     }
 
     @FXML
     private void logScaleOnAction(ActionEvent event) {
-        // Note: Same as above. Logic is handled by the ToggleGroup listener.
+        // Logic to switch to Logarithmic Scale (Static Plot)
+        if (currentSequence != null && currentStartNum != -1) {
+            // Set scale, then re-plot
+            ((NumberAxis) chart.getYAxis()).setLabel("Value (Log Scale)");
+            plotCurrentSequence(currentStartNum, true);
+        }
     }
 
     @FXML
