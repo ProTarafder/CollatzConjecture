@@ -11,6 +11,7 @@ import Model.CollatzModel;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -37,8 +38,6 @@ public class CompareController {
     @FXML
     private VBox compareChartContainer;
     @FXML
-    private NumberAxis compareXAxis, compareYAxis;
-    @FXML
     private TextArea compareMetrics;
 
     private LineChart<Number, Number> compareChart;
@@ -48,7 +47,6 @@ public class CompareController {
     /**
      * Initializes the controller class.
      */
-    @FXML
     public void initialize() {
 
         NumberAxis x = new NumberAxis();
@@ -72,6 +70,7 @@ public class CompareController {
             }
         });
     }
+    
     private void onCompareStart() {
         // 1. Validate and Parse Seeds
         List<Integer> seeds = Validation.parseSeeds(compareInput.getText());
@@ -118,10 +117,21 @@ public class CompareController {
 
     
     private void showError(String header, String content) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText(header);
-            alert.setContentText(content);
-            alert.showAndWait();
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Error");
+        alert.setHeaderText(header);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
+    @FXML
+    private void backOnAction(ActionEvent event) {
+        try {
+            Stage stage = (Stage) ((Button) event.getSource()).getScene().getWindow();
+            SceneSwitch.switchTo(stage, "/View/SingleRun.fxml");
         }
+        catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
 }
