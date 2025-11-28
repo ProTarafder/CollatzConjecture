@@ -61,14 +61,7 @@ public class CompareController {
         compareChartContainer.getChildren().add(compareChart);
 
         compareStartBtn.setOnAction(e -> onCompareStart());
-        backBtn.setOnAction(e -> {
-            try {
-                Stage stage = (Stage) compareChart.getScene().getWindow();
-                SceneSwitch.switchTo(stage, "collatz/SingleRun.fxml");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });
+
     }
     
     private void onCompareStart() {
