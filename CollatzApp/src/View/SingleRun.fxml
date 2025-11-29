@@ -60,7 +60,6 @@
                 <Button fx:id="startBtn" onAction="#runOnAction" text="Run" />
                 <Button fx:id="pauseBtn" onAction="#pauseOnAction" text="Pause" />
                 <Button fx:id="resetBtn" onAction="#resetOnAction" text="Reset" />
-                <Button fx:id="exportBtn" onAction="#exportOnAction" text="Export CSV" />
             </HBox>
 
             <!-- Chart Container (LineChart added in controller) -->
