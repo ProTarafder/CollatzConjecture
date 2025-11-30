@@ -18,7 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- *
+ * The main class for the java application
  * @author thiago
  */
 public class CollatzApp extends Application {
@@ -27,6 +27,11 @@ public class CollatzApp extends Application {
         launch(args);
     }
     
+    /**
+     * initializes two stages: a temporary welcome screen, then the main application
+     * @param primaryStage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         //Add an image for background

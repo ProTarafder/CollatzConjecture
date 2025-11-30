@@ -35,7 +35,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 
 /**
- * event handler for the project, to be build after scene builder is ready.
+ * event handler for the single run version of the application
  *
  * @author thiago
  */
@@ -72,6 +72,9 @@ public class CollatzController{
     
     private static int MAX_RECOMMENDED = 10_000; //can change
 
+    /**
+     * initializes the controller class
+     */
     public void initialize() {
 
         NumberAxis x = new NumberAxis();
@@ -98,7 +101,7 @@ public class CollatzController{
     }
 
     /**
-     * gets all the information from the CollatzModel class when pressed
+     * handles the action when the "Run" button is pressed, validating the input, calculating its Collatz sequence, and displaying it on the chart
      * @param event 
      */
     @FXML
@@ -160,9 +163,14 @@ public class CollatzController{
         
 
         NumberAxis yAxis = (NumberAxis) chart.getYAxis();
-        yAxis.setLabel(useLogScale ? "Value (Log Scale)" : "Value");
-        
+        yAxis.setLabel(useLogScale ? "Value (Log Scale)" : "Value");   
     }
+    
+    /**
+     * plots the Collatz sequence onto the JavaFX chart in linear or logarithmic scale
+     * @param num the starting number of the sequence being plotted
+     * @param useLogScale if the chart is plotted in logarithmic or linear scale
+     */
     private void plotCurrentSequence(long num, boolean useLogScale) {
         if (timeline != null) timeline.stop();
         chart.getData().clear();
@@ -191,6 +199,10 @@ public class CollatzController{
         }
     }
 
+    /**
+     * pauses or resumes the plotting animation for the chart
+     * @param event 
+     */
     @FXML
     private void pauseOnAction(ActionEvent event) {
         if (timeline != null) {
@@ -204,6 +216,10 @@ public class CollatzController{
         }
     }
 
+    /**
+     * resets the application state back to its initial condition, clearing results and stopping any running process
+     * @param event 
+     */
     @FXML
     private void resetOnAction(ActionEvent event) {
         if (timeline != null) timeline.stop();
@@ -214,6 +230,10 @@ public class CollatzController{
         inputField.clear();
     }
 
+    /**
+     * allows the user to export the current sequence metrics to a CSV file
+     * @param event 
+     */
     @FXML
     private void exportOnAction(ActionEvent event) {
         if (metricsArea.getText().isEmpty()) {
@@ -238,6 +258,11 @@ public class CollatzController{
         }
     }
     
+    /**
+     * creates an alert with an error message when the user inputs an invalid input
+     * @param header string to be displayed in the header area of the alert
+     * @param content the error message to be displayed in the content area
+     */
     private void showError(String header, String content) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -246,6 +271,11 @@ public class CollatzController{
         alert.showAndWait();
     }
     
+    /**
+     * creates a warning but still allows the inputted value
+     * @param header string to be displayed in the header area of the alert
+     * @param content the warning message to be displayed in the content area
+     */
     private void showWarning(String header, String content) {
         javafx.scene.control.Alert alert = new javafx.scene.control.Alert(javafx.scene.control.Alert.AlertType.WARNING);
         alert.setTitle("Warning");
@@ -254,17 +284,26 @@ public class CollatzController{
         alert.showAndWait();
     }
 
+    
     @FXML
     private void exportItemOnAction(ActionEvent event) {
         // Calls the existing logic
         exportOnAction(event);
     }
-
+    
+    /**
+     * allows the user to exit the application
+     * @param event 
+     */
     @FXML
     private void exitOnAction(ActionEvent event) {
         Platform.exit();
     }
-
+    
+    /**
+     * allows the user to switch the chart to linear scale 
+     * @param event 
+     */
     @FXML
     private void linearScaleOnAction(ActionEvent event) {
         // Logic to switch to Linear Scale (Animation)
@@ -275,6 +314,10 @@ public class CollatzController{
         }
     }
 
+    /**
+     * allows the user to switch the chart to logarithmic scale
+     * @param event 
+     */
     @FXML
     private void logScaleOnAction(ActionEvent event) {
         // Logic to switch to Logarithmic Scale (Static Plot)
@@ -284,7 +327,11 @@ public class CollatzController{
             plotCurrentSequence(currentStartNum, true);
         }
     }
-
+    
+    /**
+     * allows the user to switch the scene to be able to compare two different inputs
+     * @param event 
+     */
     @FXML
     private void openCompareOnAction(ActionEvent event) {
         try {
@@ -296,6 +343,10 @@ public class CollatzController{
         }
     }
 
+    /**
+     * displays information about the Collatz Conjecture
+     * @param event 
+     */
     @FXML
     private void aboutOnAction(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Main;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
+ * validates and parses user inputs for the Collatz sequence calculations
  * @author Admin
  */
 public class Validation {
@@ -20,7 +16,7 @@ public class Validation {
      * Parses user's input string into list of positive integers
      * separates by commas and/or spaces
      */
- public static List<Long> parseSeeds(String input){ // RETURN TYPE CHANGED to List<Long>
+    public static List<Long> parseSeeds(String input){ // RETURN TYPE CHANGED to List<Long>
         List<Long> out = new ArrayList<>();
         
         if (input == null || input.isBlank())
@@ -46,7 +42,7 @@ public class Validation {
     
     /**
      * Validation for single seed
-     * Returns warning msg if invalid, otherwise it will be null
+     * Returns warning message if invalid, otherwise it will be null
      */
     public static String validateSeed(long seed, long recommendedMax){
         if (seed <= 0){

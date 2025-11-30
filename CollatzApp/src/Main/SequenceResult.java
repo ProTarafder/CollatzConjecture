@@ -5,10 +5,9 @@
 package Main;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
- *
+ * a data class that stores metrics for the Collatz sequence
  * @author thiago
  */
 public class SequenceResult {
@@ -19,7 +18,7 @@ public class SequenceResult {
     private final long peakNum;
     private final long stopTime;
     private final double avgGrowth;
-
+    
     public SequenceResult(long startNum, List<Long> sequence, long stepsToOne, long peakNum, long stopTime, double avgGrowth) {
         this.startNum = startNum;
         this.sequence = sequence;

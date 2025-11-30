@@ -25,11 +25,10 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * FXML Controller class
+ * event handler for the compare version of the application
  *
  * @author Admin
  */
-
 public class CompareController {
 
     @FXML
@@ -46,7 +45,7 @@ public class CompareController {
     private Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
 
     /**
-     * Initializes the controller class.
+     * initializes the controller class
      */
     public void initialize() {
 
@@ -67,9 +66,11 @@ public class CompareController {
                 onCompareStart();
             }
         });
-
     }
     
+    /**
+     * initializes the comparison of 2 Collatz Sequences based on the user input
+     */
     private void onCompareStart() {
         // 1. Validate and Parse Seeds
         List<Long> seeds = Validation.parseSeeds(compareInput.getText());
@@ -114,7 +115,11 @@ public class CompareController {
         compareMetrics.setText(metricsOutput.toString());
     }
 
-    
+    /**
+     * creates an alert with an error message when the user inputs an invalid input
+     * @param header string to be displayed in the header area of the alert
+     * @param content the error message to be displayed in the content area
+     */
     private void showError(String header, String content) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
@@ -122,7 +127,11 @@ public class CompareController {
         alert.setContentText(content);
         alert.showAndWait();
     }
-
+    
+    /**
+     * when the user to go back to the single run scene
+     * @param event 
+     */
     @FXML
     private void backOnAction(ActionEvent event) {
         try {
