@@ -38,7 +38,7 @@ public class Validation {
             if(value <= 0) {
                 throw new NumberFormatException("Negative or zero value: " + value);
             }
-            
+ 
             out.add(value);
         }
         return out;
