@@ -51,14 +51,17 @@
 
     <center>
         <VBox spacing="10">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
             <HBox spacing="8">
                 <Label text="Enter n:" />
                 <TextField fx:id="inputField" prefWidth="200" promptText="e.g. 27 or 5,10,25" />
                 <Button fx:id="startBtn" onAction="#runOnAction" text="Run" />
                 <Button fx:id="pauseBtn" onAction="#pauseOnAction" text="Pause" />
                 <Button fx:id="resetBtn" onAction="#resetOnAction" text="Reset" />
-                <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#exportOnAction" text="Export CSV" />
-            </HBox>
+                </HBox>
 
             <VBox fx:id="chartContainer" prefHeight="400" spacing="10" />
 
@@ -70,4 +73,4 @@
         </VBox>
     </center>
 
-    </BorderPane>
+</BorderPane>

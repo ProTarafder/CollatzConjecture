@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.SplitPane?>
@@ -23,13 +24,20 @@
     <center>
         <SplitPane dividerPositions="0.5" orientation="VERTICAL">
             
-            <!-- Chart Container (LineChart added in controller) -->
-            <VBox fx:id="compareChartContainer" prefWidth="800" spacing="10" />
+            <VBox fx:id="compareChartContainer" prefWidth="800" spacing="10">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
+            </VBox>
 
             <VBox spacing="10">
+                <padding>
+                    <Insets top="20" right="20" bottom="20" left="20"/>
+                </padding>
                 <Label text="Comparison Metrics" />
                 <TextArea fx:id="compareMetrics" editable="false" prefWidth="300" wrapText="true" />
             </VBox>
+
         </SplitPane>
     </center>
 </BorderPane>
