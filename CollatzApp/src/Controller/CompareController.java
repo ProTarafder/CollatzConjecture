@@ -45,7 +45,7 @@ public class CompareController {
     private Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
 
     /**
-     * initializes the controller class
+     * Initializes the controller class
      */
     public void initialize() {
 
@@ -132,7 +132,7 @@ public class CompareController {
     }
     
     /**
-     * when the user to go back to the single run scene
+     * When the user to go back to the single run scene
      * @param event 
      */
     @FXML

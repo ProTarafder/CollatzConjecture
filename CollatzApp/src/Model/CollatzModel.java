@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * handles all the mathematical logic for the Collatz Conjecture
+ * Handles all the mathematical logic for the Collatz Conjecture
  * @author thiago
  */
 public class CollatzModel {
     /**
-     * generates the sequence, peak, steps, average growth, and stopping time
+     * Generates the sequence, peak, steps, average growth, and stopping time
      * @param startNum the number inputted 
      * @return aSequenceResult object containing everything
      */

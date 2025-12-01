@@ -7,7 +7,7 @@ package Main;
 import java.util.List;
 
 /**
- * a data class that stores metrics for the Collatz sequence
+ * A data class that stores metrics for the Collatz sequence
  * @author thiago
  */
 public class SequenceResult {
