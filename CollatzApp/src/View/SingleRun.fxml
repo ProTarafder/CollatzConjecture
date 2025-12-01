@@ -19,7 +19,6 @@
     <top>
         <MenuBar>
             <menus>
-
                 <Menu text="File">
                     <items>
                         <MenuItem fx:id="exportMenuItem" onAction="#exportItemOnAction" text="Export CSV..." />
@@ -46,36 +45,29 @@
                         <MenuItem fx:id="aboutMenu" onAction="#aboutOnAction" text="About" />
                     </items>
                 </Menu>
-
             </menus>
         </MenuBar>
     </top>
 
     <center>
         <VBox spacing="10">
-
             <HBox spacing="8">
                 <Label text="Enter n:" />
                 <TextField fx:id="inputField" prefWidth="200" promptText="e.g. 27 or 5,10,25" />
                 <Button fx:id="startBtn" onAction="#runOnAction" text="Run" />
                 <Button fx:id="pauseBtn" onAction="#pauseOnAction" text="Pause" />
                 <Button fx:id="resetBtn" onAction="#resetOnAction" text="Reset" />
-            <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#exportOnAction" text="Export CSV" />
+                <Button fx:id="exportBtn" mnemonicParsing="false" onAction="#exportOnAction" text="Export CSV" />
             </HBox>
 
-            <!-- Chart Container (LineChart added in controller) -->
-            <VBox fx:id="chartContainer" prefHeight="500" spacing="10" />
+            <VBox fx:id="chartContainer" prefHeight="400" spacing="10" />
+
+            <VBox spacing="10">
+                <Label text="Metrics" />
+                <TextArea fx:id="metricsArea" editable="false" prefHeight="200" prefWidth="800" wrapText="true" />
+            </VBox>
+        
         </VBox>
     </center>
 
-    <right>
-        <VBox spacing="10">
-            <Label text="Metrics" />
-            <TextArea fx:id="metricsArea" editable="false" prefHeight="600" prefWidth="260" wrapText="true" />
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-        </VBox>
-    </right>
-    
-</BorderPane>
+    </BorderPane>
