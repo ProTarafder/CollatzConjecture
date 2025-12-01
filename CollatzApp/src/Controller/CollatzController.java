@@ -64,11 +64,11 @@ public class CollatzController{
     private Timeline timeline;
     private int animationIndex = 0;
     private List<Long> currentSequence;
-    private boolean paused = false;
-    private int currentStartNum = -1;
+    private final boolean paused = false;
+    private final int currentStartNum = -1;
     
-    private CollatzModel model = new CollatzModel();
-    private Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
+    private final CollatzModel model = new CollatzModel();
+    private final Map<Long, SequenceResult> memo = new ConcurrentHashMap<>();
     
     private static int MAX_RECOMMENDED = 10_000; //can change
 
@@ -115,7 +115,7 @@ public class CollatzController{
         } catch (NumberFormatException e) {
             // 2. CATCH INVALID INPUT
             // This block runs if ANY letter or symbol was found.
-            showError("Invalid Input", "Please enter only valid positive numbers.\n(Found invalid text: '" + inputField.getText() + "')");
+            showError("Invalid Input", "Please enter only valid positive whole numbers.\n(Found invalid text: '" + inputField.getText() + "')");
             return; // STOPS THE PROGRAM HERE
         }
 

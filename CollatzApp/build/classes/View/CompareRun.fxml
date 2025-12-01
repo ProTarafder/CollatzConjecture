@@ -21,7 +21,7 @@
 
 
     <center>
-        <SplitPane dividerPositions="0.5" orientation="HORIZONTAL">
+        <SplitPane dividerPositions="0.5" orientation="VERTICAL">
             
             <!-- Chart Container (LineChart added in controller) -->
             <VBox fx:id="compareChartContainer" prefWidth="800" spacing="10" />

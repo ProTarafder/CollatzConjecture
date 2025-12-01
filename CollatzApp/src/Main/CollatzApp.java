@@ -28,21 +28,15 @@ public class CollatzApp extends Application {
     }
     
     /**
-     * initializes two stages: a temporary welcome screen, then the main application
+     * Initializes two stages: a temporary welcome screen, then the main application
      * @param primaryStage
      * @throws Exception 
      */
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //Add an image for background
-        ImageView background = new ImageView(new Image(
-                getClass().getResource("").toExternalForm()));
-        background.setFitWidth(1000);
-        background.setFitHeight(750);
-        background.setPreserveRatio(false);
         
         Label title = new Label("Collatz Conjecture Visualization");
-        title.setStyle("-fx-font-size: 40px; -fx-text-fill: pink; -fx-font-weight: bold;");
+        title.setStyle("-fx-font-size: 50px; -fx-text-fill: pink; -fx-font-weight: bold;");
         
         Button start = new Button("Start");
         start.setStyle("-fx-font-size: 22px; -fx-padding: 10 35;");
@@ -50,7 +44,9 @@ public class CollatzApp extends Application {
         VBox content = new VBox(25, title, start);
         content.setStyle("-fx-alignment: center");
         
-        StackPane splashRoot = new StackPane(background, content);
+        StackPane splashRoot = new StackPane(content);
+        splashRoot.setStyle("-fx-background-color: #2b2b2b;");
+        
         Scene splashScene = new Scene(splashRoot, 1000, 750, false, SceneAntialiasing.BALANCED);
         
         Stage splashStage = new Stage();
