@@ -68,13 +68,20 @@ public class CompareController {
         });
     }
     
-    /**
-     * initializes the comparison of 2 Collatz Sequences based on the user input
-     */
+    
     private void onCompareStart() {
-        // 1. Validate and Parse Seeds
-        List<Long> seeds = Validation.parseSeeds(compareInput.getText());
+        // 1. Validate and Parse Seeds with Error Handling
+        List<Long> seeds;
+        try {
+            // This will crash if input contains "h" or other garbage
+            seeds = Validation.parseSeeds(compareInput.getText());
+        } catch (NumberFormatException e) {
+            showError("Invalid Input", "Please enter only valid positive integers separated by commas.\n(Found invalid text)");
+            return; // Stops the crash
+        }
+
         if (seeds.isEmpty()) {
+            // Uses the existing compareMetrics TextArea to show info, or you could use showError()
             compareMetrics.setText("No valid seeds provided. Please enter positive integers.");
             return;
         }
@@ -87,7 +94,6 @@ public class CompareController {
 
         // 3. Process and Plot Each Seed
         for (long seed : seeds) {
-
             // Get result (computes or retrieves from cache)
             SequenceResult result = memo.computeIfAbsent(seed, model::calculateSequence);
 
@@ -97,12 +103,10 @@ public class CompareController {
 
             List<Long> seq = result.sequence();
             
-            // --- PLOTTING LOGIC ADDED HERE ---
+            // --- PLOTTING LOGIC ---
             for (int i = 0; i < seq.size(); i++) {
-                // Plots the step index (i) vs the value (seq.get(i))
                 series.getData().add(new XYChart.Data<>(i, seq.get(i)));
             }
-            // --- END PLOTTING LOGIC ---
 
             compareChart.getData().add(series);
 
