@@ -1,14 +1,13 @@
 package Main;
 
 import java.util.List;
-import org.junit.jupiter.api.Test; // JUnit 5 import
-import static org.junit.jupiter.api.Assertions.*; // JUnit 5 assertions
+import org.junit.Test; // JUnit 4 Import
+import static org.junit.Assert.*; // JUnit 4 Assertions
 
 public class ValidationTest {
 
     @Test
     public void testValidMultipleInputs() {
-        // Test parsing comma and space separators
         String input = "5, 10 20";
         List<Long> result = Validation.parseSeeds(input);
         
@@ -18,29 +17,21 @@ public class ValidationTest {
         assertEquals(Long.valueOf(20), result.get(2));
     }
 
-    @Test
+    // JUnit 4 style: Expect the exception in the annotation
+    @Test(expected = NumberFormatException.class)
     public void testStrictLetterRejection() {
-        // Should throw NumberFormatException immediately on "h"
         String input = "2727 h";
-        
-        assertThrows(NumberFormatException.class, () -> {
-            Validation.parseSeeds(input);
-        });
+        Validation.parseSeeds(input); // This should crash
     }
 
-    @Test
+    @Test(expected = NumberFormatException.class)
     public void testNegativeRejection() {
-        // Should throw NumberFormatException for negatives due to your strict check
         String input = "-5";
-        
-        assertThrows(NumberFormatException.class, () -> {
-            Validation.parseSeeds(input);
-        });
+        Validation.parseSeeds(input); // This should crash
     }
 
     @Test
     public void testEmptyInput() {
-        // Should return empty list, not crash
         List<Long> result = Validation.parseSeeds("");
         assertTrue(result.isEmpty());
         
