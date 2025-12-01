@@ -36,7 +36,7 @@ import javafx.scene.input.KeyCode;
 /**
  * Event handler for the single run version of the application
  *
- * @author thiago
+ * @author thiago abi
  */
 public class CollatzController {
 
@@ -53,15 +53,15 @@ public class CollatzController {
     private Button pauseBtn;
     @FXML
     private Button resetBtn;
-
-    @FXML
-    private MenuItem openCompareMenu;
-    @FXML
-    private MenuItem exportMenuItem;
-    @FXML
-    private MenuItem exitMenuItem;
-    @FXML
-    private MenuItem aboutMenu;
+//
+//    @FXML
+//    private MenuItem openCompareMenu;
+//    @FXML
+//    private MenuItem exportMenuItem;
+//    @FXML
+//    private MenuItem exitMenuItem;
+//    @FXML
+//    private MenuItem aboutMenu;
 
     @FXML
     private RadioMenuItem linearScaleMenu;

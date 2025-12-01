@@ -1,8 +1,8 @@
 package Main;
 
 import java.util.List;
-import org.junit.Test; // JUnit 4 Import
-import static org.junit.Assert.*; // JUnit 4 Assertions
+import org.junit.Test; 
+import static org.junit.Assert.*;
 
 public class ValidationTest {
 
@@ -17,7 +17,7 @@ public class ValidationTest {
         assertEquals(Long.valueOf(20), result.get(2));
     }
 
-    // JUnit 4 style: Expect the exception in the annotation
+   
     @Test(expected = NumberFormatException.class)
     public void testStrictLetterRejection() {
         String input = "2727 h";

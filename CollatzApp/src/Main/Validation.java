@@ -49,7 +49,7 @@ public class Validation {
             return "Only positve integers are allwowed";
         }
         if(seed > recommendedMax){
-            return "The input " + seed + " exceeds the limit of " + recommendedMax;
+            return "The input " + seed + " exceeds the recommended limit of " + recommendedMax;
         }
         return null;
     }

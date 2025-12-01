@@ -2,8 +2,8 @@ package Model;
 
 import Main.SequenceResult;
 import java.util.List;
-import org.junit.Test; // JUnit 4 Import
-import static org.junit.Assert.*; // JUnit 4 Assertions
+import org.junit.Test;
+import static org.junit.Assert.*; 
 
 public class CollatzModelTest {
 
@@ -36,7 +36,7 @@ public class CollatzModelTest {
         long input = 113383;
         SequenceResult result = model.calculateSequence(input);
         
-        // JUnit 4 message is the first argument
+     
         assertTrue("Peak should exceed integer limit", result.peakNum() > Integer.MAX_VALUE);
         assertEquals(2482111348L, result.peakNum());
     }
