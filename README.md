@@ -33,7 +33,7 @@ Comparing Collatz Sequences of numbers 10 and 20:
 
 ---------------
 ## 👥 Team Members:
-* Abinayan Selvaratnam 
+* Abinayan Selvaratnam https://github.com/jellospyro10
 * Protiti Tarafder https://github.com/ProTarafder
 * Thiago Okamura https://github.com/ThiagoOkamura
 ---------
