@@ -20,6 +20,7 @@ This JavaFX application is designed to easily explore and visualize the behavior
 * User-Friendly Interface: Built using JavaFX Scene Builder for a clean user interface.
 * Linear/Logarithmic Line Chart Display: Switches between linear and logarithmic line chart for a better visualization for smaller and bigger Collatz sequences.
 * Data exporting (CSV): Allows the user to export key metrics data in a CSV file.
+* Error Handling: Handles validation to prevent non-integers or very large n inputs and shows the corresponding warning or error messages.
 * Comparison between 2 Sequences simultaneously: Displays the Collatz sequences in the same line chart, as well as key metrics for both sequences in a clear way to allow comparison between the Collatz Conjecture for 2 different inputs.
 ---------------
 ## 📷 Screenshots/Demonstration
@@ -32,8 +33,8 @@ Comparing Collatz Sequences of numbers 10 and 20:
 
 ---------------
 ## 👥 Team Members:
-* 
-*
+* Abinayan Selvaratnam 
+* Protiti Tarafder https://github.com/ProTarafder
 * Thiago Okamura https://github.com/ThiagoOkamura
 ---------
 Link to the Trello board: https://trello.com/b/OK69jODk/programming-project
