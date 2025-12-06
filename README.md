@@ -23,6 +23,20 @@ This JavaFX application is designed to easily explore and visualize the behavior
 * Error Handling: Handles validation to prevent non-integers or very large n inputs and shows the corresponding warning or error messages.
 * Comparison between 2 Sequences simultaneously: Displays the Collatz sequences in the same line chart, as well as key metrics for both sequences in a clear way to allow comparison between the Collatz Conjecture for 2 different inputs.
 ---------------
+## ⚙️Getting Started: How to Run the Application: 
+This section will provide you with the steps necessary to run the application.
+1. Prerequisites
+   Before cloning the application, ensure you have the following:
+   * Java Development Kit (JDK) 17 or higher
+   * JavaFX SDK
+   * JavaFX Scene Builder
+2. Clone the Repository
+   *Open your terminal and clone the project using Git:
+   *cd "path to wherever you want the project to be cloned to"
+   *git clone https://github.com/ProTarafder/CollatzConjecture.git
+3. Open and run the project using your IDE of preference
+  
+------------------------
 ## 📷 Screenshots/Demonstration
 
 See the Collatz Sequence for the starting number 27:
@@ -32,7 +46,7 @@ Comparing Collatz Sequences of numbers 10 and 20:
 ![](readme_Images/Collatz1020Ex.png)
 
 ---------------
-## 👥 Team Members:
+## 👥 Team Members and Contributions:
 * Abinayan Selvaratnam https://github.com/jellospyro10
 * Protiti Tarafder https://github.com/ProTarafder
 * Thiago Okamura https://github.com/ThiagoOkamura
