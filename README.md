@@ -48,7 +48,23 @@ Comparing Collatz Sequences of numbers 10 and 20:
 ---------------
 ## 👥 Team Members and Contributions:
 * Abinayan Selvaratnam https://github.com/jellospyro10
+  * Single Run controller
+  * Compare Run controller
+  * JUnit testing
+  * Submitting all documents in time
+  * Project Documentation
 * Protiti Tarafder https://github.com/ProTarafder
+  * UI Layout and styling
+  * Single Run Controller
+  * Compare Run Controller
+  * Some of the helper classes (sceneSwitch, Valdidation, CollatzApp)
+  * Project Documentation
 * Thiago Okamura https://github.com/ThiagoOkamura
+  * Single Run Controller
+  * CollatzModel class
+  * Some of the helper classes (CSVExport, SequenceResult) 
+  * JUnit testing
+  * Trello board management and readme file
+
 ---------
 Link to the Trello board: https://trello.com/b/OK69jODk/programming-project
